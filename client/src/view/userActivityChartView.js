@@ -41,7 +41,7 @@ class UserActivityChartView extends React.Component {
     return (
       <div className="row">
         <Chart
-          chartType="LineChart"
+          chartType="Line"
           data={this.state.userVsdate}
           options={options}
           width={'100%'}

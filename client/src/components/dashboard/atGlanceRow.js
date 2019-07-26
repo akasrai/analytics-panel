@@ -43,7 +43,7 @@ class atGlanceRow extends React.Component {
               title="Total Countries"
               percentage={this.props.usersDetails.totalCountries.percent}
               data={
-                this.props.usersDetails.totalCountries.data[0].totalCountries
+                this.props.usersDetails.totalCountries.total
               }
               isIncreased={this.props.usersDetails.totalCountries.isIncrease}
             />

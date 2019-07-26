@@ -6,6 +6,7 @@ const getAsync = promisify(client.get).bind(client);
 let liveUsers = {};
 let connections = [];
 let availabeSites = [];
+let oldUsers = [];
 
 const showLiveUsers = server => {
   const io = socketIo(server);
@@ -20,11 +21,17 @@ const showLiveUsers = server => {
       try {
         await getAsync('availableSites').then(res => {
           if (res) {
+            availabeSites = [];
+            console.log('===========================' + res);
             availabeSites = [...JSON.parse(res)];
             if (checkIfArrayDataExists(availabeSites, room)) {
+              console.log(
+                '======================================returned true'
+              );
               availabeSites.push(room);
             }
           } else {
+            console.log('====================================returned false');
             availabeSites.push(room);
           }
           client.set('availableSites', JSON.stringify(availabeSites));
@@ -52,12 +59,17 @@ const showLiveUsers = server => {
               if (liveUsers[disconnectedSocket]) {
                 io.to(appClient).emit(
                   'liveUsersActivity',
-                  'User with id ' + liveUsers[disconnectedSocket].userId + ' disconnected.'
+                  'User with id ' +
+                    liveUsers[disconnectedSocket].userId +
+                    ' disconnected.'
                 );
 
                 delete liveUsers[disconnectedSocket];
                 client.SET(appClient, JSON.stringify(liveUsers));
-                io.to(appClient).emit('liveUsers', Object.keys(liveUsers).length);
+                io.to(appClient).emit(
+                  'liveUsers',
+                  Object.keys(liveUsers).length
+                );
               }
             }
           });
@@ -125,7 +137,18 @@ const showLiveUsers = server => {
       // SENDING DATA TO THE CONNECTED ROOMS
       io.sockets.emit('testSocketMsg', { msg: liveUsers });
       io.to(appClient).emit('liveUsers', Object.keys(liveUsers).length);
-      io.to(appClient).emit('liveUsersActivity', 'New user joined with id ' + userId + '.');
+
+      // if(oldUsers != null ) {
+      //   if(checkIfArrayDataExists(oldUsers, userId)) {
+      //     oldUsers.push(userId);
+      //     io.to(appClient).emit('liveUsersActivity', 'New user joined with id ' + userId + '.');
+      //   }
+      // } else {
+      io.to(appClient).emit(
+        'liveUsersActivity',
+        'New user joined with id ' + userId + '.'
+      );
+      // }
     });
 
     // ON USER EVENT OCCURANCE
@@ -135,13 +158,18 @@ const showLiveUsers = server => {
       if (activity.trackData) {
         io.to(appClient).emit(
           'liveUsersActivity',
-          activity.trackData.eventName + ' event clicked by user' + activity.userInfo.userId
+          activity.trackData.eventName +
+            ' event invoked by user ' +
+            activity.userInfo.userId
         );
       }
       if (activity.pageData) {
         io.to(appClient).emit(
           'liveUsersActivity',
-          'User ' + activity.userInfo.userId + ' redirected to page ' + activity.pageData.url
+          'User ' +
+            activity.userInfo.userId +
+            ' redirected to page ' +
+            activity.pageData.url
         );
       }
     });
@@ -154,6 +182,7 @@ const checkIfArrayDataExists = (parentArr, newChild) => {
 
   parentArr.map(child => {
     if (child === newChild) {
+      console.log('=======================' + child + '==========' + newChild);
       arrDataExists = false;
     }
   });

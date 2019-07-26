@@ -7,10 +7,19 @@
 		"path": "server"
 	},
 	{
-		"path": "/home/akasky/Desktop/Leapfrog/NodeJs/ioChat"
+		"path": "userClient"
 	},
 	{
-		"path": "userClient"
+		"path": "find-a-room"
+	},
+	{
+		"path": "tic-tac-toe-react-redux"
+	},
+	{
+		"path": "example"
+	},
+	{
+		"path": "mix-panel-client"
 	}
 ],
   "settings": {}
