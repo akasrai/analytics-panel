@@ -28,7 +28,7 @@ export function getTracksWithMetaData(ClientId = '', query = {}) {
   const page = query.page || '1';
   const sortBy = query.sort_by || 'id';
   const pageSize = query.page_size || '10';
-  const sortOrder = query.sort_order || 'ASC';
+  const sortOrder = query.sort_order || 'DESC';
 
   let newDate = null;
   let isDate = false;
@@ -77,8 +77,14 @@ export function getTracksWithMetaData(ClientId = '', query = {}) {
         qb.whereRaw('tracks.created_at::date = ?', newDate);
       }
       if (isLocation) {
-        qb.whereRaw('em.location ->> ? = ?', ['latitude', JSON.parse(query.latitude)]);
-        qb.whereRaw('em.location ->> ? = ?', ['longitude', JSON.parse(query.longitude)]);
+        qb.whereRaw('em.location ->> ? = ?', [
+          'latitude',
+          JSON.parse(query.latitude),
+        ]);
+        qb.whereRaw('em.location ->> ? = ?', [
+          'longitude',
+          JSON.parse(query.longitude),
+        ]);
       }
       if (isEventQuery) {
         qb.where('tracks.event_name', 'iLIKE', `%${query.event_name}%`);
@@ -155,7 +161,11 @@ export async function getTrackAnalytics(clientId = '', query = {}) {
 
     .query(q => {
       q.distinct('tracks.event_name', 'em.browser', 'em.os', 'em.device')
-        .select(KNEX.raw(`count(em.user_id) OVER (PARTITION BY tracks.event_name) AS total_users`))
+        .select(
+          KNEX.raw(
+            `count(em.user_id) OVER (PARTITION BY tracks.event_name) AS total_users`
+          )
+        )
         .join('event_metadata as em', 'tracks.metadata_id', 'em.id')
         .orderBy('total_users', 'DESC');
       if (col) {

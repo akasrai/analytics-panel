@@ -5,7 +5,6 @@ import TracksChartView from './tracksChartView';
 import LiveUserActivity from './liveUserActivity';
 import BrowserChartView from './browserChartView';
 import UserActivityChartView from './userActivityChartView';
-// import { connectLiveServer } from '../utils/liveConnection';
 import AtGlanceRow from '../components/dashboard/atGlanceRow';
 
 import '../components/dashboard/dashboard.css';

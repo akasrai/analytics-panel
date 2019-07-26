@@ -2,22 +2,22 @@ import * as MIXPANEL from "./services/mixPanelServices";
 
 // module.exports.default = MIXPANEL;
 const connect = MIXPANEL.configure({
-  email: "shrijan00003@gmail.com",
-  apiKey: "abc123"
+   email: "shrijan00003@gmail.com",
+   apiKey: "abc123"
 });
 if (connect) {
-  MIXPANEL.identify();
-  MIXPANEL.track({
-    name: "Homepage",
-    eventName: "Profile Updated",
-    payload: { payload: "paylod" }
-  });
+   MIXPANEL.identify();
+   // MIXPANEL.track({
+   //   name: "Homepage",
+   //   eventName: "Profile Updated",
+   //   payload: { payload: "paylod" }
+   // });
 
-  MIXPANEL.page({
-    name: "Gallery",
-    title: "Gallery",
-    keywords: ["keywords"]
-  });
+   // MIXPANEL.page({
+   //   name: "Gallery",
+   //   title: "Gallery",
+   //   keywords: ["keywords"]
+   // });
 }
 // (function() {
 //   // Establish the root object, `window` in the browser, or `global` on the server.
@@ -72,9 +72,9 @@ console.log(process.env.TARGET);
 console.log(MIXPANEL);
 
 if (process.env.TARGET === "web") {
-  //   module.exports.default = MIXPANEL;
-  // } else {
-  window.MIXPANEL = MIXPANEL;
+   //   module.exports.default = MIXPANEL;
+   // } else {
+   window.MIXPANEL = MIXPANEL;
 } else {
-  module.exports = MIXPANEL;
+   module.exports = MIXPANEL;
 }

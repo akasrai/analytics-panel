@@ -3,9 +3,9 @@ export function getTopData(listOfData, data = null) {
   let a = [];
 
   var obj = listOfData.reduce(function(acc, curr) {
-    //accumulator, currentValue
-    // console.log(acc, curr);
-    a.push([curr.os, curr.userName]);
+
+    // console.log( curr);
+      a.push([curr.os, curr.userName]);
     switch (data) {
       case 'os':
         acc[curr.os] ? acc[curr.os]++ : (acc[curr.os] = 1);

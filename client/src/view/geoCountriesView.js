@@ -11,7 +11,7 @@ class GeoCountries extends React.Component {
     };
   }
   async componentDidMount() {
-    let metaData = this.props.usersDetails.metaData;
+    let metaData = await this.props.usersDetails.metaData;
 
     if (metaData.length > 0) {
       let countryName = [];

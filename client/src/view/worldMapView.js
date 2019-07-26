@@ -32,7 +32,7 @@ class WorldMap extends React.Component {
       chartData: '',
       latLngArray: '',
       currentPageNo: '1',
-      pageSize: '2',
+      pageSize: '10',
       displayData: null,
     };
     this.handleChange = this.handleChange.bind(this);
@@ -74,7 +74,7 @@ class WorldMap extends React.Component {
     this.setState(prevState => ({
       chartData: [...prevState.chartData, ...userFromCountryResult],
       latLngArray: [...latlngArrayResult],
-      displayData: userFromCountryResult.slice(1, 3),
+      displayData: userFromCountryResult.slice(1, 10),
     }));
     // if (!this.props.chartIsLoaded) {
     //   this.props.fetchChart(userFromCountryResult, latlngArrayResult);
@@ -212,9 +212,9 @@ class WorldMap extends React.Component {
                       name="pageSize"
                       onChange={this.handleChange}
                     >
-                      <option value="2">2</option>
-                      <option value="3">3</option>
                       <option value="10">10</option>
+                      <option value="50">50</option>
+                      <option value="100">100</option>
                     </select>
                   </div>
                 </div>

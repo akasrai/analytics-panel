@@ -32,7 +32,7 @@ export function getPagesWithMetaData(clientId = '', query = {}) {
   console.log(clientId, query);
 
   const sortBy = query.sort_by || 'id';
-  const sortOrder = query.sort_order || 'ASC';
+  const sortOrder = query.sort_order || 'DESC';
   const page = query.page || '1';
   const pageSize = query.page_size || '10';
 

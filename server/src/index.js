@@ -23,7 +23,7 @@ showLiveUsers(server);
 
 app.use(function(req, res, next) {
   res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Credentials', false);
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
   res.header(
     'Access-Control-Allow-Headers',
@@ -33,7 +33,11 @@ app.use(function(req, res, next) {
 });
 
 const APP_PORT =
-  (process.env.NODE_ENV === 'test' ? process.env.TEST_APP_PORT : process.env.APP_PORT) || process.env.PORT || '3000';
+  (process.env.NODE_ENV === 'test'
+    ? process.env.TEST_APP_PORT
+    : process.env.APP_PORT) ||
+  process.env.PORT ||
+  '3000';
 const APP_HOST = process.env.APP_HOST || '0.0.0.0';
 
 app.set('port', APP_PORT);
