@@ -50,7 +50,7 @@
     "bookshelf-camelcase": "^2.0.1",
     "boom": "^5.1.0",
     "chai": "^4.0.0",
-    "codecov": "^3.6.5",
+    "codecov": "^3.7.1",
     "compression": "^1.6.2",
     "connect-redis": "^3.3.3",
     "cookie-parser": "^1.4.3",
