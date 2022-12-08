@@ -60,7 +60,7 @@
     "eslint": "^4.7.0",
     "eslint-config-prettier": "^2.6.0",
     "eslint-plugin-prettier": "^2.6.2",
-    "express": "^4.15.3",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "helmet": "^3.6.1",
     "http-status-codes": "^1.1.6",
